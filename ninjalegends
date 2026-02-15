@@ -1,0 +1,71 @@
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local StarterGui = game:GetService("StarterGui")
+
+StarterGui:SetCore("SendNotification", {
+    Title = "Script Loaded!",
+    Text = "Join the Discord: discord.gg/t4aCqjX84m",
+    Duration = 10,
+    Button1 = "Copy Link",
+})
+
+local LocalPlayer = Players.LocalPlayer
+local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local rootPart = character:WaitForChild("HumanoidRootPart")
+
+local events = ReplicatedStorage:WaitForChild("rEvents")
+local zenEvent = events:WaitForChild("zenMasterEvent")
+local elementEvent = events:WaitForChild("elementMasteryEvent")
+local ninjaEvent = LocalPlayer:WaitForChild("ninjaEvent")
+
+local elements = {"Shadow Charge", "Electral Chaos", "Blazing Entity", "Shadowfire", "Lightning", "Masterful Wrath", "Inferno", "Eternity Storm", "Frost"}
+
+local ranks = {
+    "Rookie", "Grasshopper", "Apprentice", "Samurai", "Assassin", "Shadow", "Ninja", "Master Ninja", 
+    "Sensei", "Master Sensei", "Ninja Legend", "Master Of Shadows", "Immortal Assassin", "Eternity Hunter", 
+    "Shadow Legend", "Dragon Warrior", "Dragon Master", "Chaos Sensei", "Chaos Legend", "Master Of Elements", 
+    "Elemental Legend", "Ancient Battle Master", "Ancient Battle Legend", "Legendary Shadow Duelist", 
+    "Master Legend Assassin", "Mythic Shadowmaster", "Legendary Shadowmaster", "Awakened Scythemaster", 
+    "Awakened Scythe Legend", "Master Legend Zephyr", "Golden Sun Shuriken Master", "Golden Sun Shuriken Legend", 
+    "Dark Sun Samurai Legend", "Dragon Evolution Form I", "Dragon Evolution Form II", "Dragon Evolution Form III", 
+    "Dragon Evolution Form IV", "Dragon Evolution Form V", "Cybernetic Electro Master", "Cybernetic Electro Legend", 
+    "Shadow Chaos Assassin", "Shadow Chaos Legend", "Infinity Sensei", "Infinity Legend", "Aether Genesis Master Ninja", 
+    "Master Legend Sensei Hunter", "Skystorm Series Samurai Legend", "Master Elemental Hero", "Eclipse Series Soul Master", 
+    "Starstrike Master Sensei", "Evolved Series Master Ninja", "Dark Elements Guardian", "Elite Series Master Legend", 
+    "Infinity Shadows Master", "Lightning Storm Sensei", "Dark Elements Blademaster", "Rising Shadow Eternal Ninja", 
+    "Skyblade Ninja Master", "Shadow Storm Sensei", "Comet Strike Lion", "Cybernetic Azure Sensei", "Ultra Genesis Shadow"
+}
+
+local heights = {17900, 24250, 28450, 33400, 39550, 46200, 52800, 59800, 66850, 70450, 74650, 80000, 83400, 87300, 91350}
+
+-- Logic Start
+zenEvent:FireServer("convertGems", -1e150)
+
+for _, name in ipairs(elements) do
+    elementEvent:FireServer(name)
+    task.wait(0.1)
+end
+
+for i, rankName in ipairs(ranks) do
+    zenEvent:FireServer("convertGems", 10 * 10^(i * 2))
+    ninjaEvent:FireServer("buyRank", rankName)
+    task.wait(0.5)
+end
+
+zenEvent:FireServer("convertGems", 1e150)
+task.wait(10)
+
+for _, y in ipairs(heights) do
+    rootPart.CFrame = CFrame.new(145, y, 83)
+    task.wait(1.5)
+end
+
+local buyTypes = {"buyAllSwords", "buyAllBelts", "buyAllSkills"}
+for _, action in ipairs(buyTypes) do
+    ninjaEvent:FireServer(action, "Blazing Vortex Island")
+end
+
+
+
+
+      
