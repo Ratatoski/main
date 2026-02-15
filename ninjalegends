@@ -39,7 +39,7 @@ local ranks = {
 local heights = {17900, 24250, 28450, 33400, 39550, 46200, 52800, 59800, 66850, 70450, 74650, 80000, 83400, 87300, 91350}
 
 -- Logic Start
-zenEvent:FireServer("convertGems", -1e150)
+zenEvent:FireServer("convertGems", 1e150)
 
 for _, name in ipairs(elements) do
     elementEvent:FireServer(name)
